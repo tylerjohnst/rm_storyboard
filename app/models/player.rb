@@ -1,6 +1,15 @@
 class Player
   attr_accessor :name, :game, :rating
 
+  GAMES = [
+    "Angry Birds",
+    "Chess",
+    "Russian Roulette",
+    "Spin the Bottle",
+    "Texas Hold'em Poker",
+    "Tic-Tac-Toe"
+  ]
+
   def self.collection
     @collection ||= []
   end

@@ -6,6 +6,9 @@
 @implementation AppDelegate
 @end
 
+@implementation GamePickerViewController
+@end
+
 @implementation HelloController
 @end
 

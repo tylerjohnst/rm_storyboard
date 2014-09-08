@@ -8,6 +8,11 @@
 @interface AppDelegate: UIResponder <UIApplicationDelegate>
 @end
 
+@interface GamePickerViewController: UITableViewController
+-(IBAction) viewDidLoad;
+
+@end
+
 @interface HelloController: UIViewController
 
 @property IBOutlet UIScrollView * scroller;
@@ -27,6 +32,7 @@
 @end
 
 @interface PlayersViewController: UITableViewController
+-(IBAction) create_player:(id) name;
 -(IBAction) player_details_view_cancelled:(id) controller;
 -(IBAction) player_details_view_saved:(id) controller;
 -(IBAction) child_of_view:(id) view;
