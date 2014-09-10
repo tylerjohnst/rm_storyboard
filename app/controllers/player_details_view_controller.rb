@@ -51,6 +51,7 @@ class PlayerDetailsViewController < UITableViewController
   def update_player_properties
     @player.name = nameTextField.text
     @player.game = @game
+    puts @player.inspect
   end
 
   def set_game_name_label

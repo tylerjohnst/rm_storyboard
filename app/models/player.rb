@@ -30,7 +30,9 @@ class Player
   end
 
   def save
-    self.class.collection.push(self)
+    if new?
+      self.class.collection.push(self)
+    end
   end
 
   def new?

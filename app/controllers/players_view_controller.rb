@@ -34,7 +34,7 @@ class PlayersViewController < UITableViewController
 
   # @param [Player] player
   # @param [Boolean] is_new
-  def player_update_complete(player, is_new)
+  def save_player(player, is_new)
     player.save
 
     if is_new

@@ -22,7 +22,9 @@ class GamePickerViewController < UITableViewController
   def tableView(tableView, didSelectRowAtIndexPath:indexPath)
     uncheck_row find_active_cell(tableView) unless @selected.nil?
     @selected = game(indexPath)
+    delegate.select_game(@selected)
     check_row find_active_cell(tableView)
+    tableView.deselectRowAtIndexPath(indexPath, animated:false)
   end
 
   def game(indexPath)
