@@ -62,6 +62,7 @@
                                     <outlet property="gameLabel" destination="3I4-um-xAN" id="EWq-Lm-nPn"/>
                                     <outlet property="nameLabel" destination="rlV-Ii-Ahh" id="wdI-dF-WpM"/>
                                     <outlet property="ratingImage" destination="mqB-vP-O0a" id="FfX-wR-of9"/>
+                                    <segue destination="hbW-fo-KIt" kind="modal" identifier="EditPlayer" id="3MA-Zf-a2A"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -161,6 +162,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="gameNameLabel" destination="oZg-bk-Bi0" id="Sy5-vY-wbn"/>
                         <outlet property="nameTextField" destination="Egk-Ph-Jnc" id="rm5-vN-0Dx"/>
                     </connections>
                 </tableViewController>
@@ -268,4 +270,7 @@
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
+    <inferredMetricsTieBreakers>
+        <segue reference="3MA-Zf-a2A"/>
+    </inferredMetricsTieBreakers>
 </document>

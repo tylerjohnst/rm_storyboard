@@ -1,26 +1,48 @@
 class PlayersViewController < UITableViewController
+  include ChildViewHelpers
+
+  CELL_IDENTIFIER = 'PlayerCell'
 
   attr_accessor :players
 
+  def viewDidLoad
+    super
+    tableView.backgroundView = nil
+  end
+
   def tableView(tableView, numberOfRowsInSection: section)
-    @players.size
+    players.size
   end
 
   def tableView(tableView, cellForRowAtIndexPath: indexPath)
-    player = @players[indexPath.row]
+    player = find_player_from_index_path(indexPath)
     subtitle_cell(tableView, player)
   end
 
   def prepareForSegue(segue, sender:sender)
+    child_view = child_of_view(segue.destinationViewController)
+    child_view.delegate = self
+
     if segue.identifier == 'AddPlayer'
-      child_of_view(segue.destinationViewController).delegate = self
+      prepare_view_for_new_player(child_view)
+    end
+    
+    if segue.identifier == 'EditPlayer'
+      prepare_view_for_editing_player(child_view, tableView.indexPathForSelectedRow)
     end
   end
 
-  def create_player(name)
-    player = Player.create(name, 'Chess', 1)
-    indexPath = NSIndexPath.indexPathForRow(Player.collection.size - 1, inSection: 0)
-    tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimationAutomatic)
+  # @param [Player] player
+  # @param [Boolean] is_new
+  def player_update_complete(player, is_new)
+    player.save
+
+    if is_new
+      indexPath = NSIndexPath.indexPathForRow(Player.collection.size - 1, inSection: 0)
+      tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimationAutomatic)
+    else
+      tableView.reloadData
+    end
   end
 
   def player_details_view_cancelled(controller)
@@ -31,16 +53,20 @@ class PlayersViewController < UITableViewController
     dismiss_child_view!
   end
 
-  private
-
-  CELL_IDENTIFIER = 'PlayerCell'
-
-  def dismiss_child_view!
-    self.dismissViewControllerAnimated(true, completion:nil)
+private
+  
+  def prepare_view_for_new_player(child_view)
+    child_view.player = Player.new
   end
 
-  def child_of_view(view)
-    view.viewControllers[0]
+  # @param [NSIndexPath] player_id
+  def prepare_view_for_editing_player(child_view, indexPath)
+    child_view.player = find_player_from_index_path(indexPath)
+  end
+
+  # @param [NSIndexPath] indexPath
+  def find_player_from_index_path(indexPath)
+    players[indexPath.row]
   end
 
   def subtitle_cell(view, player)
@@ -54,5 +80,9 @@ class PlayersViewController < UITableViewController
   def rating_image_for(score)
     plural = score == 1 ? '' : 's'
     UIImage.imageNamed("#{score}Star#{plural}Small")
+  end
+
+  def child_of_view(view)
+    view.viewControllers[0]
   end
 end

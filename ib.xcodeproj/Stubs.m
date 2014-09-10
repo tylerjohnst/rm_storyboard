@@ -9,9 +9,6 @@
 @implementation GamePickerViewController
 @end
 
-@implementation HelloController
-@end
-
 @implementation PlayerDetailsViewController
 @end
 

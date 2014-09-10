@@ -1,6 +1,6 @@
 class GamePickerViewController < UITableViewController
 
-  attr_accessor :selected
+  attr_accessor :selected, :delegate
 
   def viewDidLoad
     super
@@ -20,9 +20,9 @@ class GamePickerViewController < UITableViewController
   end
 
   def tableView(tableView, didSelectRowAtIndexPath:indexPath)
-    uncheck_row(find_active_cell(tableView)) unless @selected.nil?
+    uncheck_row find_active_cell(tableView) unless @selected.nil?
     @selected = game(indexPath)
-    check_row(find_active_cell(tableView))
+    check_row find_active_cell(tableView)
   end
 
   def game(indexPath)

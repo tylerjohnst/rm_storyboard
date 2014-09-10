@@ -10,24 +10,21 @@
 
 @interface GamePickerViewController: UITableViewController
 -(IBAction) viewDidLoad;
-
-@end
-
-@interface HelloController: UIViewController
-
-@property IBOutlet UIScrollView * scroller;
-@property IBOutlet id btn_hello;
-
--(IBAction) say_hello:(id) sender;
+-(IBAction) game:(id) indexPath;
+-(IBAction) find_active_cell:(id) tableView;
+-(IBAction) check_row:(id) cell;
+-(IBAction) uncheck_row:(id) cell;
 
 @end
 
 @interface PlayerDetailsViewController: UITableViewController
 
 @property IBOutlet UITextField * nameTextField;
+@property IBOutlet UILabel * gameNameLabel;
 
 -(IBAction) done:(id) sender;
 -(IBAction) cancel:(id) sender;
+-(IBAction) select_game:(id) game;
 
 @end
 
@@ -35,7 +32,6 @@
 -(IBAction) create_player:(id) name;
 -(IBAction) player_details_view_cancelled:(id) controller;
 -(IBAction) player_details_view_saved:(id) controller;
--(IBAction) child_of_view:(id) view;
 -(IBAction) rating_image_for:(id) score;
 
 @end
