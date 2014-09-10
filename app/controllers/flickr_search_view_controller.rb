@@ -10,6 +10,7 @@ class FlickrSearchViewController < UIViewController
 
   def viewDidLoad
     super
+    imageView.contentMode = UIViewContentModeScaleAspectFill
     searchBox.delegate = self
   end
 
